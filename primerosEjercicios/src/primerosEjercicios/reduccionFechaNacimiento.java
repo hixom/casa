@@ -13,6 +13,7 @@ public class reduccionFechaNacimiento {
 		fechaSuma=dia+mes+anio;
 		suma(fechaSuma);
 		
+		
 	}	
 	public static void suma(int fechaSuma){
 		int valor=0;
