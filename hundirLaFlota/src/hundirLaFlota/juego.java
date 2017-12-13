@@ -1,15 +1,15 @@
 package hundirLaFlota;
 import java.util.Scanner;
 public class juego {
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		//posiicondel barco
 		int valorX;
 		int valorY;
 		int valorYFinal;
 		int valorXFinal;
-		int[] arrayFichasDoble= new int[3];
-		int[] arrayFichasTriple= new int[2];
-		int[] arrayFichasCuadruple = new int[1];
+		int[][] arrayFichasDoble= new int[3][4];
+		int[][] arrayFichasTriple= new int[2][6];
+		int[][] arrayFichasCuadruple = new int[1][8];
 		
 		
 		
@@ -17,7 +17,7 @@ public class juego {
 		Scanner sc=new Scanner(System.in);
 		
 		
-		arrayFichasDoble=valoresFichas(4);
+		arrayFichasDoble=valoresFichas(arrayFichasDoble.length,arrayFichasDoble[].length);
 		
 	
 		arrayFichasTriple=valoresFichas(3);
@@ -72,7 +72,7 @@ public class juego {
 		
 		return arrayValores;
 	}
-	public static int[] valoresFichas(int nRepeticiones) {
+	public static int[][] valoresFichas(int nRepeticiones, int nCoordenadas) {
 		 int valorX;
 		 int valorY; 
 		 int valorXFinal; 
@@ -82,17 +82,17 @@ public class juego {
 		
 		nRepeticiones -= 1;
 		
-		int[] arrayFichas=new int[nRepeticiones];
+		int[][] arrayFichas=new int[nRepeticiones][];
 		
 		for (int i=nRepeticiones; i>0; i--) {
 		
-	
+			arrayFichas[i]=new int[];
 		//crea un objeto en cada posicion del array y los valores de este los pasamos con una funcion-array
-			Ficha arrayFichas[i] =  new Ficha( pedirValores() );
+			Ficha arrayFichas[i][] =  new Ficha( pedirValores() );
 			
 			
 		}
 		
 		return arrayFichas;
-	}
+	}*/
 }
