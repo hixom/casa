@@ -5,6 +5,9 @@ public class juego {
 		int[][] terrenoPlayer1= new int[10][10];
 		int[][] terrenoPlayer2= new int[10][10];
 		
+		
+		
+		
 		terrenoPlayer1= ponerTodoNulo(terrenoPlayer1);
 		terrenoPlayer2= ponerTodoNulo(terrenoPlayer2);
 		
@@ -160,12 +163,15 @@ public class juego {
 	public static Boolean[] comprobarIntermedios(int[][] terreno,int posicionY, int posicionX, int diferenciaEjes, int caso, int valor){
 		final int AVANCEINTERMEDIOS;
 		Boolean[] arrayOcupados= new Boolean[diferenciaEjes];
+		int[] posicionIntermedia=new int[2];
 		switch(caso){
 			case 0:
 				AVANCEINTERMEDIOS = 1;
 				
 				for(int i=0;i>diferenciaEjes;i++){
-					if(terreno[posicionY + AVANCEINTERMEDIOS + i][posicionX]!=-1){
+					posicionIntermedia=elegirCaso(posicionY, posicionX, 1, i);
+					terreno[posicionIntermedia[0]][posicionIntermedia[1]]=valor;
+					if(posicion!=-1){
 						arrayOcupados[i]=true;
 					}
 					
@@ -218,11 +224,16 @@ public class juego {
 		for (int i=0;i<3;i++){
 			System.out.println("Vamos a prceder a seleccionar la posición de las fichas que pertenecen a dos coordenadas contiguas");
 			posiciones=preguntarValores(terreno,1,20+i);
-			diferenciaY=Math.abs(posiciones[0][0]-posiciones[1][0]);
-			diferenciaX=Math.abs(posiciones[0][1]-posiciones[1][1]);
-			terreno=darValoresTerreno(terreno, posiciones[0][0], posiciones[0][1],  posiciones[1][0], posiciones[1][1],  20+i, diferenciaY, diferenciaX, ListaOcupadoIntermedios, false, false, false);
+			
+			//diferenciaY=Math.abs(posiciones[0][0]-posiciones[1][0]);
+			//diferenciaX=Math.abs(posiciones[0][1]-posiciones[1][1]);
+			
+			//terreno=darValoresTerreno(terreno, posiciones[0][0], posiciones[0][1],  posiciones[1][0], posiciones[1][1],  20+i, diferenciaY, diferenciaX, ListaOcupadoIntermedios, false, false, false);
+		
+			terreno = ponerBarco(terreno,posiciones[0][0],posiciones[0][1],posiciones[1][0],posiciones[1][1], 20+i);
+			
 		}
-		posiciones=new int[2][3];
+		posiciones=new int[3][2];
 		for (int i=0;i<2;i++){
 			System.out.println("Vamos a prceder a seleccionar la posición de las fichas que pertenecen a tres coordenadas contiguas");
 			diferenciaY=Math.abs(posiciones[0][0]-posiciones[1][0]);
@@ -359,9 +370,9 @@ public class juego {
 			do{	
 				System.out.println("¿Estás satisfecho con tu elección?");
 				satisfecho=sc.next();
-			}while(satisfecho!="si" || satisfecho!="si" );
+			}while(!satisfecho.equals("si") && !satisfecho.equals("no"));
 		}while((posicionY<0 || posicionY>10 || posicionX<0 || posicionX>10 || posicionYFinal<0 || posicionYFinal>10 ||posicionXFinal<0 || posicionXFinal>10  ) ||  
-				ocupadoFinal==true || ocupadoInicial==true || ocupadoIntermedios==true || ValoresMalEspaciados==true || satisfecho=="no");
+				ocupadoFinal==true || ocupadoInicial==true || ocupadoIntermedios==true || ValoresMalEspaciados==true || satisfecho.equals("no"));
 		
 		posiciones[0][0]=posicionY;
 		posiciones[0][1]=posicionX;
@@ -369,4 +380,43 @@ public class juego {
 		posiciones[1][1]=posicionXFinal;
 		return posiciones;
 	}
+	
+	public static int[][] ponerBarco(int[][] tablero, int posicionXini, int posicionYini, int posicionXfin, int posicionYfin, int barco) {
+		
+		
+		if((posicionXini - posicionXfin)<0) {
+			
+			int aux = posicionXini;
+			posicionXfin = posicionXini;
+			posicionXini = posicionXfin;
+			
+		}
+		
+		if((posicionYini - posicionYfin)<0) {
+			
+			int aux = posicionYini;
+			posicionYfin = posicionYini;
+			posicionYini = posicionYfin;
+			
+		}
+		
+		
+		
+		for(int x = 0; x<tablero.length; x++ ) {
+			for(int y = 0; y < tablero[x].length; y++ ) {
+				
+				
+				if((x>= posicionXini) &&  (y >= posicionYini) && (x<=posicionXfin) && (y<=posicionYfin)) {
+					
+					tablero[x][y] = barco;
+					
+				}
+				
+			}
+		}
+		
+		return tablero;
+	}
 }
+
+
