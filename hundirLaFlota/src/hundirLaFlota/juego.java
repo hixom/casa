@@ -26,119 +26,6 @@ public class juego {
 		}
 		return terreno;
 	}
-//	sirve para dar  los valores a la funcion generarTerreno con las nuevas modificaciones, ya sean erroneas o no, asiq para diferenciarlas empezamos comparando si había algún valor intermedio erróneo, en caso de que sí pintamos con las modificacions con los comodines
-//	y en caso de que no pintamos como normalmente
-	public static int[][] darValoresTerreno(int [][] terreno, int posicionY, int posicionX, int posicionYFinal, int posicionXFinal, int valor, int diferenciaY, int diferenciaX, Boolean[] ListaOcupadoIntermedios, Boolean ocupadoIntermedios, Boolean ocupadoInicial, Boolean ocupadoFinal){
-		int[] posicionIntermedia=new int[2];
-		if(ocupadoInicial==true){
-			terreno[posicionY][posicionX]=-valor;
-		}else{
-			terreno[posicionY][posicionX]=valor;
-		 }
-		
-		if(ocupadoFinal==true){
-			terreno[posicionYFinal][posicionXFinal]=-valor;
-		}else{terreno[posicionYFinal][posicionXFinal]=valor;
-		 }
-		
-		if(diferenciaX!=0 || diferenciaY!=0){
-			if(ocupadoIntermedios==true){
-				if(diferenciaX==0 && posicionY < posicionYFinal ){
-					for (int i=0;i<ListaOcupadoIntermedios.length;i++){
-								posicionIntermedia=elegirCaso(posicionY, posicionX, 0, i);
-								
-							if(ListaOcupadoIntermedios[i]==true){
-								terreno[posicionIntermedia[0]][posicionIntermedia[1]]= terreno[posicionIntermedia[0]][posicionIntermedia[1]] + valor;
-							}else{terreno[posicionIntermedia[0]][posicionIntermedia[1]]=valor;}
-						}
-				}
-				if(diferenciaX==0 && posicionY > posicionYFinal){ 
-						for (int i=0;i<ListaOcupadoIntermedios.length;i++){
-								posicionIntermedia=elegirCaso(posicionY, posicionX, 1, i);
-								
-							if(ListaOcupadoIntermedios[i]==true){
-								terreno[posicionIntermedia[0]][posicionIntermedia[1]]= terreno[posicionIntermedia[0]][posicionIntermedia[1]] + valor;
-							}else{terreno[posicionIntermedia[0]][posicionIntermedia[1]]=valor;}
-						}
-						
-				}
-				if(diferenciaY==0 && posicionX > posicionXFinal){	
-					for (int i=0;i<ListaOcupadoIntermedios.length;i++){
-						posicionIntermedia=elegirCaso(posicionY, posicionX, 2, i);
-						
-						if(ListaOcupadoIntermedios[i]==true){
-							terreno[posicionIntermedia[0]][posicionIntermedia[1]]= terreno[posicionIntermedia[0]][posicionIntermedia[1]] + valor;
-						}else{terreno[posicionIntermedia[0]][posicionIntermedia[1]]=valor;}
-					}
-				}
-				if(diferenciaY==0 && posicionX < posicionXFinal){	
-					for (int i=0;i<ListaOcupadoIntermedios.length;i++){
-						posicionIntermedia=elegirCaso(posicionY, posicionX, 3, i);
-						
-						if(ListaOcupadoIntermedios[i]==true){
-							terreno[posicionIntermedia[0]][posicionIntermedia[1]]= terreno[posicionIntermedia[0]][posicionIntermedia[1]] + valor;
-						}else{terreno[posicionIntermedia[0]][posicionIntermedia[1]]=valor;}
-					}
-				}	
-			}
-			
-			}else{
-				if(diferenciaX==0 && posicionY < posicionYFinal ){
-					for (int i=0;i<ListaOcupadoIntermedios.length;i++){
-							posicionIntermedia=elegirCaso(posicionY, posicionX, 0, i);
-							terreno[posicionIntermedia[0]][posicionIntermedia[1]]=valor;
-					}
-				}
-				if(diferenciaX==0 && posicionY > posicionYFinal){ 
-					for (int i=0;i<ListaOcupadoIntermedios.length;i++){
-						posicionIntermedia=elegirCaso(posicionY, posicionX, 1, i);
-						terreno[posicionIntermedia[0]][posicionIntermedia[1]]=valor;
-					}
-				}
-				if(diferenciaY==0 && posicionX > posicionXFinal){	
-					for (int i=0;i<ListaOcupadoIntermedios.length;i++){
-						posicionIntermedia=elegirCaso(posicionY, posicionX, 2, i);
-						terreno[posicionIntermedia[0]][posicionIntermedia[1]]=valor;
-					}
-				}
-				if(diferenciaY==0 && posicionX < posicionXFinal){	
-					for (int i=0;i<ListaOcupadoIntermedios.length;i++){
-						posicionIntermedia=elegirCaso(posicionY, posicionX, 3, i);
-						terreno[posicionIntermedia[0]][posicionIntermedia[1]]=valor;
-					}
-				}
-			}
-			
-			
-		return terreno;
-	}
-//	sirve para devolver el valor que necesites de una ficha del medio correspondiente al caso que queramos, esta función la he creado ya que muchas veces tenía que usar estas sentencias y es más probable y 
-//	difícil de detectar un error en toda esa oración que el de solo haber metido mal el número del caso
-	public static int[] elegirCaso(int posicionY, int posicionX, int caso, int i){
-		final int AVANCEINTERMEDIOS=1;
-		int[] posicion=new int[2];
-		switch(caso){
-			case 0:
-				posicion[0]=posicionY + AVANCEINTERMEDIOS + i;
-				posicion[1]=posicionX;
-				
-				break;
-			case 1:
-				posicion[0]=posicionY - AVANCEINTERMEDIOS - i;
-				posicion[1]=	posicionX;
-	
-				break;
-			case 2:
-				posicion[0]=posicionY;
-				posicion[1]=posicionX  - AVANCEINTERMEDIOS - i;
-				break;
-			case 3:
-				posicion[0]=posicionY;
-				posicion[1]=	posicionX  + AVANCEINTERMEDIOS + i;
-				break;	
-		}
-		return posicion;
-	}
 //	sirve para comparar el terreno anterior con el erroneo (paso por esta todos los valores en vez de llamar a la función de generar el "terrenoErroneo" directamente porque si no crearíamos en la función de crearFichas 
 //	una variable que es posible que no usemos y gastaríamos un espacio, cosa que siempre que se pueda evitar mejor)
 	public static void mostrarErrores(int[][] terreno, int[][] terrenoErroneo){
@@ -160,54 +47,36 @@ public class juego {
 		}
 	}
 //	sirve para comprovar si estan repetidos los valores intermedios de las fichas
-	public static Boolean[] comprobarIntermedios(int[][] terreno,int posicionY, int posicionX, int diferenciaEjes, int caso, int valor){
-		final int AVANCEINTERMEDIOS;
-		Boolean[] arrayOcupados= new Boolean[diferenciaEjes];
-		int[] posicionIntermedia=new int[2];
-		switch(caso){
-			case 0:
-				AVANCEINTERMEDIOS = 1;
-				
-				for(int i=0;i>diferenciaEjes;i++){
-					posicionIntermedia=elegirCaso(posicionY, posicionX, 1, i);
-					terreno[posicionIntermedia[0]][posicionIntermedia[1]]=valor;
-					if(posicion!=-1){
-						arrayOcupados[i]=true;
-					}
-					
-				}
-				break;
-			case 1:
-				AVANCEINTERMEDIOS = -1;
-				
-				for(int i=0;i>- diferenciaEjes;i--){
-					if(terreno[posicionY - AVANCEINTERMEDIOS - i][posicionX]!=-1){
-						arrayOcupados[i]=true;
+	public static Boolean[] comprobarIntermedios(int[][] terreno,int posicionY, int posicionX, int diferenciaY, int diferenciaX, int posicionYFinal, int posicionXFinal, int diferenciaIntermedios ){
+		Boolean[] ListaOcupadoIntermedios={false,false,false};
+		
+		if(diferenciaX==0 && diferenciaY==diferenciaIntermedios){
+			for(int y = 0; y<terreno.length; y++ ) {
+				for(int x = 0; x < terreno[y].length; x++ ) {
+					if((x> posicionX) &&  (y > posicionY) && (x<posicionXFinal) && (y<posicionYFinal)){
+						if(terreno[x][y]!=-1) {
+							ListaOcupadoIntermedios[y]=true;
+						}
 					}
 				}
-				break;
-			case 2:
-				AVANCEINTERMEDIOS = -1;
-				
-				for(int i=0;i>-diferenciaEjes;i--){
-					if(terreno[posicionY][posicionX - AVANCEINTERMEDIOS - i]!=-1){
-						arrayOcupados[i]=true;
+			}
+		}
+			
+		
+		if(diferenciaX==diferenciaIntermedios && diferenciaY==0){	
+			for(int y = 0; y<terreno.length; y++ ) {
+				for(int x = 0; x < terreno[y].length; x++ ) {
+					if((x> posicionX) &&  (y > posicionY) && (x<posicionXFinal) && (y<posicionYFinal)){
+						if(terreno[x][y]!=-1) {
+							ListaOcupadoIntermedios[y]=true;
+						}
 					}
 				}
-				break;
-			case 3:
-				AVANCEINTERMEDIOS = 1;
-				
-				for(int i=0;i>diferenciaEjes;i++){
-					if(terreno[posicionY][posicionX + AVANCEINTERMEDIOS + i]!=-1){
-						arrayOcupados[i]=true;
-					}
-				}
-				break;	
+			}	
 		}
 		
 		
-		return arrayOcupados;
+		return ListaOcupadoIntermedios;
 		
 	}
 //	sirve para generar el terreno con los valores definitivos	
@@ -220,33 +89,31 @@ public class juego {
 		int diferenciaY; 
 		int diferenciaX;
 		
-		posiciones=new int[2][2];
-		for (int i=0;i<3;i++){
-			System.out.println("Vamos a prceder a seleccionar la posición de las fichas que pertenecen a dos coordenadas contiguas");
-			posiciones=preguntarValores(terreno,1,20+i);
-			
-			//diferenciaY=Math.abs(posiciones[0][0]-posiciones[1][0]);
-			//diferenciaX=Math.abs(posiciones[0][1]-posiciones[1][1]);
-			
-			//terreno=darValoresTerreno(terreno, posiciones[0][0], posiciones[0][1],  posiciones[1][0], posiciones[1][1],  20+i, diferenciaY, diferenciaX, ListaOcupadoIntermedios, false, false, false);
-		
-			terreno = ponerBarco(terreno,posiciones[0][0],posiciones[0][1],posiciones[1][0],posiciones[1][1], 20+i);
-			
-		}
-		posiciones=new int[3][2];
+//		posiciones=new int[2][2];
+//		for (int i=0;i<3;i++){
+//			System.out.println("Vamos a prceder a seleccionar la posición de las fichas que pertenecen a dos coordenadas contiguas");
+//			posiciones=preguntarValores(terreno,1,20+i);
+//			
+//			diferenciaY=Math.abs(posiciones[0][0]-posiciones[1][0]);
+//			diferenciaX=Math.abs(posiciones[0][1]-posiciones[1][1]);
+//			
+//			terreno=ponerBarco(terreno, posiciones[0][0], posiciones[0][1],  posiciones[1][0], posiciones[1][1],  20+i, diferenciaY, diferenciaX, 1, ListaOcupadoIntermedios, false, false, false);
+//			
+//		}
 		for (int i=0;i<2;i++){
 			System.out.println("Vamos a prceder a seleccionar la posición de las fichas que pertenecen a tres coordenadas contiguas");
-			diferenciaY=Math.abs(posiciones[0][0]-posiciones[1][0]);
-			diferenciaX=Math.abs(posiciones[0][1]-posiciones[1][1]);
+			
 			posiciones=preguntarValores(terreno,2,30+i);
-			terreno=darValoresTerreno(terreno, posiciones[0][0], posiciones[0][1],  posiciones[1][0], posiciones[1][1],  30+i, diferenciaY, diferenciaX, ListaOcupadoIntermedios, false, false, false);
-		}
-		posiciones=new int[2][4];
-			System.out.println("Vamos a prceder a seleccionar la posición de las fichas que pertenecen a cuatro coordenadas contiguas");
 			diferenciaY=Math.abs(posiciones[0][0]-posiciones[1][0]);
 			diferenciaX=Math.abs(posiciones[0][1]-posiciones[1][1]);
-			posiciones=preguntarValores(terreno,3,40);
-			terreno=darValoresTerreno(terreno, posiciones[0][0], posiciones[0][1],  posiciones[1][0], posiciones[1][1],  40, diferenciaY, diferenciaX, ListaOcupadoIntermedios, false, false, false);
+			terreno=ponerBarco(terreno, posiciones[0][0], posiciones[0][1],  posiciones[1][0], posiciones[1][1],  30+i, diferenciaY, diferenciaX, 2, ListaOcupadoIntermedios, false, false, false);	
+		}
+		System.out.println("Vamos a prceder a seleccionar la posición de las fichas que pertenecen a cuatro coordenadas contiguas");
+			
+		posiciones=preguntarValores(terreno,3,40);
+		diferenciaY=Math.abs(posiciones[0][0]-posiciones[1][0]);
+		diferenciaX=Math.abs(posiciones[0][1]-posiciones[1][1]);
+		terreno=ponerBarco(terreno, posiciones[0][0], posiciones[0][1],  posiciones[1][0], posiciones[1][1],  40, diferenciaY, diferenciaX, 3, ListaOcupadoIntermedios, false, false, false);	
 		
 		
 		
@@ -281,11 +148,11 @@ public class juego {
 		terrenoErroneo=terreno;
 		int j;
 		do {
-			System.out.println("introduce valor Y por donde va a empezar la cardinalidad de la ficha");
+			System.out.println("introduce valor Y de la ficha "+ valor + " por donde va a empezar la cardinalidad de la ficha");
 			posicionY=sc.nextInt();
 			posicionY=-posicionY+10;
 			
-			System.out.println("introduce valor X por donde va a empezar la cardinalidad de la ficha");
+			System.out.println("introduce valor X de la ficha "+ valor + " por donde va a empezar la cardinalidad de la ficha");
 			posicionX=sc.nextInt();
 			posicionX-=1;
 			terrenoPrueba[posicionY][posicionX]=valor;
@@ -295,11 +162,11 @@ public class juego {
 				}
 				System.out.println("");
 			}
-			System.out.println("introduce valor Y final de la cardinalidad de la ficha");
+			System.out.println("introduce valor Y de la ficha "+ valor + " final de la cardinalidad de la ficha");
 			posicionYFinal=sc.nextInt();
 			posicionYFinal=-posicionYFinal+10;
 			
-			System.out.println("introduce valor X final de la cardinalidad de la ficha");
+			System.out.println("introduce valor X de la ficha "+ valor + " final de la cardinalidad de la ficha");
 			posicionXFinal=sc.nextInt();
 			posicionXFinal-=1;
 			terrenoPrueba[posicionYFinal][posicionXFinal]=valor;
@@ -312,6 +179,7 @@ public class juego {
 			
 			diferenciaX=Math.abs(posicionX-posicionXFinal);
 			diferenciaY=Math.abs(posicionY-posicionYFinal);
+			System.out.println("diferenciaY ="+diferenciaY+ " diferenciaX="+ diferenciaX);
 			
 //			detecta el error de si has metido algún valor que no está comprendido entre el 0 y el 10 (no pongo el "hayError=true" porque no podría reflejar un valor fuera del array)
 			if(posicionY<0 || posicionY>10 || posicionX<0 || posicionX>10 || posicionYFinal<0 || posicionYFinal>10 ||posicionXFinal<0 || posicionXFinal>10){
@@ -324,21 +192,11 @@ public class juego {
 				System.out.println("Las coordenadas que has introducido tienen espacios de más o de menos, o están en oblicuo");
 				ValoresMalEspaciados=true;
 			}
-			if((diferenciaX>1) || (diferenciaX>1)){
-				if(diferenciaX==0 && posicionY < posicionYFinal ){	
-					ListaOcupadoIntermedios=comprobarIntermedios(terreno,posicionY, posicionX, diferenciaY, 0, valor);
-				}
-				if(diferenciaX==0 && posicionY > posicionYFinal){ 
-					ListaOcupadoIntermedios=comprobarIntermedios(terreno,posicionY, posicionX, diferenciaY, 1, valor);
+			if((diferenciaX>1) || (diferenciaY>1)){
+				
+					ListaOcupadoIntermedios=comprobarIntermedios(terreno,posicionY, posicionX, diferenciaY, diferenciaX, posicionYFinal, posicionXFinal, diferenciaIntermedios);
 					
-				}
-				if(diferenciaY==0 && posicionX > posicionXFinal){	
-					ListaOcupadoIntermedios=comprobarIntermedios(terreno,posicionY, posicionX, diferenciaY, 2, valor);
-				}
-				if(diferenciaY==0 && posicionX < posicionXFinal){	
-					ListaOcupadoIntermedios=comprobarIntermedios(terreno,posicionY, posicionX, diferenciaY, 3, valor);
-				}	
-			
+//			int[][] terreno,int posicionY, int posicionX, int diferenciaEjes, int caso, int valor, int diferenciaY, int diferenciaX, int diferenciaIntermedios, int posicionYFinal, int posicionXFinal
 		
 		
 		
@@ -363,7 +221,7 @@ public class juego {
 //			como puede ser frustrante el equivocarte y que no te muestren donde está concreto el error lo siguiente sirve como una ayuda más, ya que muestra como estaba el terreno antes de introducir esta ficha y como
 //			ha quedado después de introducirla
 			if(ocupadoFinal==true || ocupadoInicial==true || ocupadoIntermedios==true || ValoresMalEspaciados==true ){
-				terrenoErroneo=darValoresTerreno(terreno, posicionY, posicionX, posicionYFinal, posicionXFinal, valor, diferenciaY, diferenciaX, ListaOcupadoIntermedios, ocupadoIntermedios, ocupadoInicial, ocupadoFinal);
+				terrenoErroneo=ponerBarco(terrenoErroneo, posicionY, posicionX, posicionYFinal, posicionXFinal, valor, diferenciaY, diferenciaX, diferenciaIntermedios, ListaOcupadoIntermedios, ocupadoInicial, ocupadoFinal, ValoresMalEspaciados);
 				mostrarErrores(terreno, terrenoErroneo);
 				
 			}
@@ -381,42 +239,79 @@ public class juego {
 		return posiciones;
 	}
 	
-	public static int[][] ponerBarco(int[][] tablero, int posicionXini, int posicionYini, int posicionXfin, int posicionYfin, int barco) {
+	public static int[][] ponerBarco(int[][] terreno, int posicionY, int posicionX, int posicionYFinal, int posicionXFinal, int valor, int diferenciaY, int diferenciaX, int diferenciaIntermedios, Boolean[] ListaOcupadoIntermedios, Boolean ocupadoInicial, Boolean ocupadoFinal, Boolean malEspaciado) {
 		
+		if(ocupadoInicial==true){
+			terreno[posicionY][posicionX]+= valor;
+		}else{
+			terreno[posicionY][posicionX]=valor;
+		 }
 		
-		if((posicionXini - posicionXfin)<0) {
-			
-			int aux = posicionXini;
-			posicionXfin = posicionXini;
-			posicionXini = posicionXfin;
-			
+		if(ocupadoFinal==true){
+			terreno[posicionYFinal][posicionXFinal]=+valor;
+		}else{terreno[posicionYFinal][posicionXFinal]=valor;
+		 }
+		
+		if(malEspaciado==true){
+			terreno[posicionY][posicionX]=-valor;
 		}
 		
-		if((posicionYini - posicionYfin)<0) {
+		
+		
+		
+		
+		
+		if(diferenciaX>1 || diferenciaY>1){	
+			if((posicionX - posicionXFinal)<0) {
 			
-			int aux = posicionYini;
-			posicionYfin = posicionYini;
-			posicionYini = posicionYfin;
-			
-		}
-		
-		
-		
-		for(int x = 0; x<tablero.length; x++ ) {
-			for(int y = 0; y < tablero[x].length; y++ ) {
+				int recordatorio = posicionX;
+				posicionX = posicionXFinal;
+				posicionXFinal = recordatorio;
 				
-				
-				if((x>= posicionXini) &&  (y >= posicionYini) && (x<=posicionXfin) && (y<=posicionYfin)) {
-					
-					tablero[x][y] = barco;
-					
-				}
 				
 			}
-		}
 		
-		return tablero;
+			if((posicionY - posicionYFinal)<0) {
+				
+				int recordatorio = posicionY;
+				posicionY = posicionYFinal;
+				posicionYFinal = recordatorio;
+				
+			}
+		
+		
+		
+		
+				
+			if(diferenciaX==0 && diferenciaY==diferenciaIntermedios){
+				for(int y = 0; y<terreno.length; y++ ) {
+					for(int x = 0; x < terreno[y].length; x++ ) {
+						if((x>= posicionX) &&  (y >= posicionY) && (x<=posicionXFinal) && (y<=posicionYFinal)) {
+							if(ListaOcupadoIntermedios[x]==true){
+								terreno[x][y] += valor;
+							}else{terreno[x][y] = valor;}
+						}
+					}
+				}
+			}	
+			
+			if(diferenciaX==diferenciaIntermedios && diferenciaY==0){	
+				for(int y = 0; y<terreno.length; y++ ) {
+					for(int x = 0; x < terreno[y].length; x++ ) {
+						if((x>= posicionX) &&  (y >= posicionY) && (x<=posicionXFinal) && (y<=posicionYFinal)) {
+							if(ListaOcupadoIntermedios[x]==true){
+								terreno[x][y] += valor;
+							}else{terreno[x][y] = valor;}
+						}
+					}
+				}	
+			
+			}
+			
+			
+		}
+			return terreno;
 	}
+		
 }
-
-
+	
