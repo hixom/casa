@@ -1,0 +1,61 @@
+package hundirLaFlota;
+
+public class ideas {
+/*una idea seria que cuando escriba todas las fichas se le muestre el mapa como queda para saber si está conforme
+ * en caso de que no lo este le damos a elegir cual ficha quiere cambiar
+ * para que no pueda poner una eztension equivocada pondremos un contador de cuantos 2, cuantos 3 y cuantos 4 hay, de esa manera no podrá
+ * para ello le preguntaremos que de cuanto es la extension, diga lo que diga, despues de realizarse el cambio conbtaremos cuantos numeros hay de esa extension (o de todas) y si da error
+ * le diremos que vuelva a elegir, ya que de esa extension ha ocupado el máximo (podre especificar de cuanto es esa extension equivocada?) 
+ * 
+ * 
+ * 
+ * 
+ * es posible usar la funcion gerenerarterrenoerroneo para el bueno como el malo?
+ * 
+ * 
+ * 
+ * 
+ * 
+ * el programa se tiene que repetir mediante un bucle que se salga de el solo diciendo que no te quieres echar mas partidas
+ * 
+ * tengo que ponerle las cifras a las coordenadas, de la misma manera que tengo que explicarle a los jugadores el significado de cada valor
+ * 
+ * 
+ * si lo consiguiera, separar el programa en clases entre el juego de 1v1 y 1vcpu
+ * 
+ * explicarle al completo al profe el programa
+ * 
+ * 
+ * 
+ * 
+ * como diria el gran Jasper Beardley.  a pique el porta-aviones
+ * 
+ * 
+ * si ha acertado sigue participando
+ * 
+ * arreglar que cuando el jugador vaya eligiendo ficha donde hundir, se vaya mostrando un terreno con sus elecciones
+ * 
+ * 
+ * mirar estas estrategias para la ia
+ * 
+ * 
+ * 
+ * 
+ * hueco sin haber elegido nunca = -1
+ * barco tocado=9
+ * hueco elegido sin nada=0
+ * 
+ * 
+ * 
+ * 
+ * tengo que cambiar el array de boolean listaOcupadosIntermedios para que el tamaño se haga dinámico en base a cuantas posiciones ocupe la ficha, por lo que le tendre que cambiar de nombre a listaOcupados simplemente 
+ * y guardara si la posicion inicial está repetida, si las intermedias lo están y si la final lo esta
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ */
+}
